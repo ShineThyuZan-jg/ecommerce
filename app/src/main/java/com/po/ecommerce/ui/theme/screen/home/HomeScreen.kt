@@ -100,7 +100,7 @@ fun HomeScreen(
                         .fillMaxWidth()
                         .weight(14f)
                 ) {
-                    SetFireBaseData(viewModel)
+                    SetFireBaseData(viewModel, navController)
                 }
             }
         }
@@ -108,7 +108,7 @@ fun HomeScreen(
 }
 
 @Composable
-fun SetFireBaseData(viewModel: MatchInfoViewModel) {
+fun SetFireBaseData(viewModel: MatchInfoViewModel, navController: NavController) {
     when (val result = viewModel.response.value) {
         MatchesDataState.Empty -> {
             Box(
@@ -138,8 +138,12 @@ fun SetFireBaseData(viewModel: MatchInfoViewModel) {
         }
 
         is MatchesDataState.Success -> {
-            ShowLazyList(result.data)
+            ShowLazyList(
+                result.data,
+            )
         }
+
+        else -> {}
     }
 }
 
