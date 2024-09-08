@@ -23,6 +23,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
@@ -67,13 +68,19 @@ fun LiveYourPerfectScreen(
 
                 Spacer(modifier = Modifier.height(8.dp))
 
-                // Subtitle Text
-                Text(
-                    text = "Smart, gorgeous & fashionable collection makes you cool",
-                    color = Color.White,
-                    fontSize = 16.sp,
-                    modifier = Modifier.padding(horizontal = 16.dp)
-                )
+                Box(
+                    modifier = Modifier
+                        .fillMaxWidth() // Make the Box take the full width of its parent
+                        .padding(horizontal = 16.dp)
+                ) {
+                    Text(
+                        text = "Smart, gorgeous & fashionable collection makes you cool",
+                        color = Color.White,
+                        fontSize = 16.sp,
+                        textAlign = TextAlign.Center, // Center the text inside the Text composable
+                        modifier = Modifier.align(Alignment.Center) // Align the Text in the center of the Box
+                    )
+                }
 
                 Spacer(modifier = Modifier.height(16.dp))
 

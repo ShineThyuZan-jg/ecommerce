@@ -23,6 +23,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.po.ecommerce.R
 import com.po.ecommerce.ui.theme.common.MatchesDataState
+import com.po.ecommerce.ui.theme.common.VerticalSpacerBase2x
 import com.po.ecommerce.ui.theme.graph.Destination
 import com.po.ecommerce.ui.theme.resources.dimen
 import com.po.ecommerce.ui.theme.viewmodel.EcommerceInfoViewModel
@@ -49,14 +50,18 @@ fun HomeScreen(
                 },
                 actions = {
                     Icon(
-                        modifier = Modifier.size(MaterialTheme.dimen.base_3x),
+                        modifier = Modifier
+                            .padding(end = MaterialTheme.dimen.base)
+                            .size(MaterialTheme.dimen.base_4x),
                         painter = painterResource(id = R.drawable.ic_bag),
                         contentDescription = "logo",
                     )
                 },
                 navigationIcon = {
                     Icon(
-                        modifier = Modifier.size(MaterialTheme.dimen.base_3x),
+                        modifier = Modifier
+                            .padding(start = MaterialTheme.dimen.base)
+                            .size(MaterialTheme.dimen.base_4x),
                         painter = painterResource(id = R.drawable.ic_menu),
                         contentDescription = "logo",
                     )
@@ -78,21 +83,20 @@ fun HomeScreen(
                 Box(
                     Modifier
                         .fillMaxWidth()
-                        .weight(2.5f)
                 ) {
                     SearchBar()
                 }
+                VerticalSpacerBase2x()
                 Box(
                     Modifier
                         .fillMaxWidth()
-                        .weight(2f)
                 ) {
                     BrandLogosView()
                 }
+                VerticalSpacerBase2x()
                 Box(
                     Modifier
                         .fillMaxWidth()
-                        .weight(2f)
                 ) {
                     PopularHeader()
                 }

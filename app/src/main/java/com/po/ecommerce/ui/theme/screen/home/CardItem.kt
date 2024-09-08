@@ -25,7 +25,7 @@ fun CardItem(
             .clickable {
                 onClickCard(ecommerce)
             }
-            .height(250.dp)
+            .height(270.dp)
             .padding(MaterialTheme.dimen.base)
 
     ) {
