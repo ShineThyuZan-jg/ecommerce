@@ -13,7 +13,7 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
 @HiltViewModel
-class MatchInfoViewModel @Inject constructor(
+class EcommerceInfoViewModel @Inject constructor(
 
 ) : ViewModel() {
     val response: MutableState<MatchesDataState> = mutableStateOf(MatchesDataState.Empty)

@@ -21,25 +21,24 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
-import androidx.navigation.NavController
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
 import com.po.ecommerce.R
 import com.po.ecommerce.ui.theme.common.EcommerceItemVo
-import com.po.ecommerce.ui.theme.graph.Destination
-import com.po.ecommerce.ui.theme.graph.Routes
 import com.po.ecommerce.ui.theme.resources.dimen
 
 @Composable
 fun CardItemContent(
     ecommerceItemVo: EcommerceItemVo,
-) {
+
+
+    ) {
     val context = LocalContext.current
+
+
     Box(modifier = Modifier
         .fillMaxSize()
-        .clickable {
-        //    navController.navigate(Destination.Detail.route)
-        }) {
+      ) {
         Row(
             modifier = Modifier
                 .fillMaxWidth()
@@ -73,6 +72,33 @@ fun CardItemContent(
             color = Color.Black,
             style = MaterialTheme.typography.titleMedium
         )
+        when (ecommerceItemVo.favorite) {
+            "1" -> {
+                Image(
+                    painter = painterResource(id = R.drawable.ic_red),
+                    modifier = Modifier
+                        .align(Alignment.TopEnd)
+                        .size(36.dp)
+                        .padding(MaterialTheme.dimen.base)
+                        .clip(shape = CircleShape),
+                    contentDescription = "logo",
+                    contentScale = ContentScale.Inside
+                )
+            }
+
+            "2" -> {
+                Image(
+                    painter = painterResource(id = R.drawable.ic_favorite),
+                    modifier = Modifier
+                        .align(Alignment.TopEnd)
+                        .size(36.dp)
+                        .padding(MaterialTheme.dimen.base)
+                        .clip(shape = CircleShape),
+                    contentDescription = "logo",
+                    contentScale = ContentScale.Inside
+                )
+            }
+        }
         Image(
             painter = painterResource(id = R.drawable.ic_favorite),
             modifier = Modifier

@@ -21,16 +21,19 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
+import com.google.gson.Gson
+import com.google.gson.GsonBuilder
 import com.po.ecommerce.R
 import com.po.ecommerce.ui.theme.common.MatchesDataState
+import com.po.ecommerce.ui.theme.graph.Destination
 import com.po.ecommerce.ui.theme.resources.dimen
-import com.po.ecommerce.ui.theme.viewmodel.MatchInfoViewModel
+import com.po.ecommerce.ui.theme.viewmodel.EcommerceInfoViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun HomeScreen(
     navController: NavController,
-    viewModel: MatchInfoViewModel = hiltViewModel()
+    viewModel: EcommerceInfoViewModel = hiltViewModel()
 ) {
     val context = LocalContext.current
     Scaffold(
@@ -108,7 +111,10 @@ fun HomeScreen(
 }
 
 @Composable
-fun SetFireBaseData(viewModel: MatchInfoViewModel, navController: NavController) {
+fun SetFireBaseData(
+    viewModel: EcommerceInfoViewModel,
+    navController: NavController
+) {
     when (val result = viewModel.response.value) {
         MatchesDataState.Empty -> {
             Box(
@@ -138,8 +144,19 @@ fun SetFireBaseData(viewModel: MatchInfoViewModel, navController: NavController)
         }
 
         is MatchesDataState.Success -> {
+
             ShowLazyList(
                 result.data,
+                onClickCard = { ecommerceVo ->
+//                    val gson: Gson = GsonBuilder().create()
+//                    val ecommerce = gson.toJson(ecommerceVo)
+//                    navController.navigate(
+//                        Destination.Detail.route.replace(
+//                            oldValue = "{ecommerceVo}",
+//                            newValue = "ecommerce"
+//                        )
+//                    )
+                }
             )
         }
 
