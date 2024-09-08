@@ -21,8 +21,6 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
-import com.google.gson.Gson
-import com.google.gson.GsonBuilder
 import com.po.ecommerce.R
 import com.po.ecommerce.ui.theme.common.MatchesDataState
 import com.po.ecommerce.ui.theme.graph.Destination
@@ -144,23 +142,16 @@ fun SetFireBaseData(
         }
 
         is MatchesDataState.Success -> {
-
             ShowLazyList(
                 result.data,
                 onClickCard = { ecommerceVo ->
-//                    val gson: Gson = GsonBuilder().create()
-//                    val ecommerce = gson.toJson(ecommerceVo)
-//                    navController.navigate(
-//                        Destination.Detail.route.replace(
-//                            oldValue = "{ecommerceVo}",
-//                            newValue = "ecommerce"
-//                        )
-//                    )
+                    viewModel.setSelectedEcommerce(ecommerceVo)
+                    navController.navigate(
+                        Destination.Detail.route
+                    )
                 }
             )
         }
-
-        else -> {}
     }
 }
 

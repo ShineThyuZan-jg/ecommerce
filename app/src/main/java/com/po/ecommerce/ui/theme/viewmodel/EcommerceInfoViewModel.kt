@@ -10,16 +10,25 @@ import com.google.firebase.database.ValueEventListener
 import com.po.ecommerce.ui.theme.common.EcommerceItemVo
 import com.po.ecommerce.ui.theme.common.MatchesDataState
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
 import javax.inject.Inject
 
 @HiltViewModel
 class EcommerceInfoViewModel @Inject constructor(
 
 ) : ViewModel() {
+
+    private val _selectedEcommerce = MutableStateFlow<EcommerceItemVo?>(null)
+    val selectedEcommerce: StateFlow<EcommerceItemVo?> = _selectedEcommerce.asStateFlow()
+
     val response: MutableState<MatchesDataState> = mutableStateOf(MatchesDataState.Empty)
+
     init {
         fetchMatchesDataFromFireBase()
     }
+
     private fun fetchMatchesDataFromFireBase() {
         val tempList = mutableListOf<EcommerceItemVo>()
         response.value = MatchesDataState.Loading
@@ -30,6 +39,7 @@ class EcommerceInfoViewModel @Inject constructor(
                 override fun onCancelled(error: DatabaseError) {
                     response.value = MatchesDataState.Failure(error.message)
                 }
+
                 override fun onDataChange(snapshot: DataSnapshot) {
                     for (DataSnap in snapshot.children) {
                         val matchItem = DataSnap.getValue(EcommerceItemVo::class.java)
@@ -39,5 +49,10 @@ class EcommerceInfoViewModel @Inject constructor(
                     response.value = MatchesDataState.Success(tempList)
                 }
             })
-        }
+    }
+
+
+    fun setSelectedEcommerce(ecommerce: EcommerceItemVo) {
+        _selectedEcommerce.value = ecommerce
+    }
 }

@@ -30,8 +30,6 @@ import com.po.ecommerce.ui.theme.resources.dimen
 @Composable
 fun CardItemContent(
     ecommerceItemVo: EcommerceItemVo,
-
-
     ) {
     val context = LocalContext.current
 
@@ -99,16 +97,6 @@ fun CardItemContent(
                 )
             }
         }
-        Image(
-            painter = painterResource(id = R.drawable.ic_favorite),
-            modifier = Modifier
-                .align(Alignment.TopEnd)
-                .size(36.dp)
-                .padding(MaterialTheme.dimen.base)
-                .clip(shape = CircleShape),
-            contentDescription = "logo",
-            contentScale = ContentScale.Inside
-        )
         Image(
             painter = painterResource(id = R.drawable.ic_cart),
             modifier = Modifier

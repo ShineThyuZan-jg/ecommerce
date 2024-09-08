@@ -1,14 +1,14 @@
 package com.po.ecommerce.ui.theme.graph
 
 import android.annotation.SuppressLint
-import android.util.Log
+import androidx.compose.runtime.remember
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
 import androidx.navigation.navigation
-import com.google.gson.Gson
-import com.google.gson.GsonBuilder
 import com.po.ecommerce.ui.theme.screen.home.HomeScreen
+import com.po.ecommerce.ui.theme.screen.news.DetailScreen
 import com.po.ecommerce.ui.theme.viewmodel.EcommerceInfoViewModel
 
 @SuppressLint("UnrememberedGetBackStackEntry")
@@ -20,23 +20,45 @@ fun NavGraphBuilder.navGraph(
         route = Routes.HOME
     ) {
         composable(route = Destination.Home.route) {
+            // val sharedViewModel: EcommerceInfoViewModel = hiltViewModel()
+            val homeBackStackEntry =
+                remember { navController.getBackStackEntry(Destination.Home.route) }
+            val ecommerceViewModel: EcommerceInfoViewModel = viewModel(homeBackStackEntry)
             HomeScreen(
                 navController = navController,
-                viewModel = EcommerceInfoViewModel()
+                viewModel = ecommerceViewModel
             )
         }
         composable(
             route = Destination.Detail.route,
-
-        ) { navBackStackEntry ->
-            val gson: Gson = GsonBuilder().create()
-            val ecommerceJson = navBackStackEntry.arguments?.getString("ecommerceVo")
-            Log.d("ecommerceJson.dd", ecommerceJson.toString())
-            // val ecommerceObject = gson.fromJson(ecommerceJson, EcommerceItemVo::class.java)
-//            DetailScreen(
-//                navController = navController,
-//                ecommerceItemVo = ecommerceObject
-//            )
+        ) {
+            val homeBackStackEntry =
+                remember { navController.getBackStackEntry(Destination.Home.route) }
+            val ecommerceViewModel: EcommerceInfoViewModel = viewModel(homeBackStackEntry)
+            DetailScreen(
+                navController = navController,
+                viewModel = ecommerceViewModel
+            )
         }
     }
 }
+
+//NavHost(navController = navController, startDestination = "home") {
+//    navigation(startDestination = "username", route = "login") {
+//        composable("username") {
+//            val loginBackStackEntry = remember { navController.getBackStackEntry("login") }
+//            val loginViewModel: LoginViewModel = viewModel(loginBackStackEntry)
+//            ...
+//        }
+//        composable("password") {
+//            val loginBackStackEntry = remember { navController.getBackStackEntry("login") }
+//            val loginViewModel: LoginViewModel = viewModel(loginBackStackEntry)
+//            ...
+//        }
+//        composable("registration") {
+//            val loginBackStackEntry = remember { navController.getBackStackEntry("login") }
+//            val loginViewModel: LoginViewModel = viewModel(loginBackStackEntry)
+//            ...
+//        }
+//    }
+//}

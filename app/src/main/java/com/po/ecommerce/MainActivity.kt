@@ -29,12 +29,14 @@ import com.onesignal.OneSignal
 import com.onesignal.debug.LogLevel
 import com.po.ecommerce.ui.theme.resources.EcommerceTheme
 import com.po.ecommerce.ui.theme.screen.MainScreen
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlin.time.Duration.Companion.seconds
 
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     private lateinit var adView: AdView
     private lateinit var appUpdateManager: AppUpdateManager

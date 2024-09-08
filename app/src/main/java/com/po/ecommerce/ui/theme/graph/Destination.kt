@@ -10,5 +10,5 @@ sealed class Destination(
 ) {
     object Splash : Destination(route = "splash_screen")
     object Home : Destination("home")
-    object Detail : Destination("detail/{ecommerceVo}")
+    object Detail : Destination("detail")
 }
