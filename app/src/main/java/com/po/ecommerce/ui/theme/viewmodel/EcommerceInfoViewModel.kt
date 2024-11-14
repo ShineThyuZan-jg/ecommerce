@@ -26,8 +26,12 @@ class EcommerceInfoViewModel @Inject constructor(
     val response: MutableState<MatchesDataState> = mutableStateOf(MatchesDataState.Empty)
 
     init {
-        fetchMatchesDataFromFireBase()
+          fetchMatchesDataFromFireBase()
     }
+
+
+
+
 
     private fun fetchMatchesDataFromFireBase() {
         val tempList = mutableListOf<EcommerceItemVo>()
